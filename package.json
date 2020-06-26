@@ -1,0 +1,49 @@
+{
+  "name": "Travelians-App",
+  "version": "1.0.0",
+  "description": "This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI.",
+  "main": "server.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "babel-loader": "^8.0.6",
+    "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^26.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-fetch": "^2.6.0",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^3.0.6",
+    "webpack-dev-server": "^3.7.2",
+    "workbox-webpack-plugin": "^5.1.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node src/server/index.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js ",
+    "watch": "webpack-dev-server --config webpack.dev.js --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdroVolt/Travelians-App.git"
+  },
+  "author": "Edro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdroVolt/Travelians-App/issues"
+  },
+  "homepage": "https://github.com/EdroVolt/Travelians-App#readme"
+}

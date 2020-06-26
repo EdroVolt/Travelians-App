@@ -1,0 +1,115 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #08d9d6;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 100vh;
+  margin: 0;
+}
+
+#app {
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  background-color: rgba(0, 0, 0, 0.616);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  color: white;
+  border-radius: 10px;
+  width: 500px;
+  max-width: 90%;
+  // height: 600px;
+}
+
+h1 {
+  text-align: center;
+  background-color: rgba(7, 6, 6, 0.644);
+  margin: 0;
+  padding: 20px;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*  Basic Styling To Override Default For Basic HTML Elements */
+
+input {
+  display: block;
+  height: 40px;
+  width: 70%;
+  padding: 10px;
+  margin: 20px 0;
+  background: #ff2e63;
+  color: #f0d43a;
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  border: none;
+  border-radius: 20px;
+}
+
+input:focus,
+button:focus {
+  outline: none;
+}
+
+button {
+  display: block;
+  padding: 10px;
+  width: 50%;
+  min-width: 100px;
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: chartreuse;
+  margin-bottom: 20px;
+  // letter-spacing: 3px;
+}
+
+button:hover {
+  background-color: rgb(59, 100, 18);
+  color: white;
+
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  padding: 20px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.info {
+  height: 160px;
+  background-color: rgba(7, 6, 6, 0.644);
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* Style for Placeholder Text*/
+::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
