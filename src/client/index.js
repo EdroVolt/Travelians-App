@@ -1,13 +1,7 @@
-import "./styles/style.scss"
+import "./styles/style.scss";
 
-import {
-    checkoutHandler,
-    getInformations
-} from "./js/app"
+import { checkoutHandler, getInformations } from "./js/app";
 
-checkoutHandler()
+checkoutHandler();
 
-export {
-    checkoutHandler,
-    getInformations
-}
+export { checkoutHandler, getInformations };

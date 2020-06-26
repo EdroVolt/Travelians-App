@@ -23,9 +23,9 @@ const app = express();
 //Here we are configuring express to use body-parser as middle-ware.
 const bodyParser = require("body-parser");
 app.use(
-    bodyParser.urlencoded({
-        extended: false,
-    })
+  bodyParser.urlencoded({
+    extended: false,
+  })
 );
 app.use(bodyParser.json());
 
@@ -44,87 +44,79 @@ const port = 8083;
 const server = app.listen(port, listening);
 
 function listening() {
-    console.log(`server running on port: ${port}`);
+  console.log(`server running on port: ${port}`);
 }
 
 app.get("/", function (req, res) {
-    res.sendFile("dist/index.html");
+  res.sendFile("dist/index.html");
 });
 
 // POST: data
 app.post("/data", retriveData);
 
 async function retriveData(req, res) {
-    const location = req.body.location;
-    const dayes = req.body.dayes;
+  const location = req.body.location;
+  const dayes = req.body.dayes;
 
-    projectData = await getInformations(location, dayes);
+  projectData = await getInformations(location, dayes);
 
-    res.send(projectData);
+  res.send(projectData);
 }
 
 // GET async function
 async function getData(url = "") {
-    const response = await fetch(url);
+  const response = await fetch(url);
 
-    try {
-        const newData = await response.json();
-        console.log(newData);
-        return newData;
-    } catch (e) {
-        console.log(e);
-    }
-};
+  try {
+    const newData = await response.json();
+    return newData;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-// get infomation about travel 
+// get infomation about travel
 async function getInformations(location, dayes) {
-    const locationData = await getData(
-        `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=${username}`
+  const locationData = await getData(
+    `http://api.geonames.org/searchJSON?q=${location}&maxRows=1&username=${username}`
+  );
+  const lat = locationData.geonames[0].lat;
+  const lng = locationData.geonames[0].lng;
+
+  let weatherResponse = {};
+
+  if (dayes <= 7) {
+    weatherResponse = await getData(
+      `https://api.weatherbit.io/v2.0/current?key=${weatherKey}&lat=${lat}&lon=${lng}`
     );
-    const lat = locationData.geonames[0].lat;
-    const lng = locationData.geonames[0].lng;
-
-    console.log(locationData.geonames[0].lat);
-    console.log(locationData.geonames[0].lng);
-
-    let weatherResponse = {};
-
-    if (dayes <= 7) {
-        weatherResponse = await getData(
-            `https://api.weatherbit.io/v2.0/current?key=${weatherKey}&lat=${lat}&lon=${lng}`
-        );
-    } else {
-        weatherResponse = await getData(
-            `https://api.weatherbit.io/v2.0/forecast/daily?key=${weatherKey}&lat=${lat}&lon=${lng}`
-        );
-    }
-
-    const weatherData = weatherResponse.data[0];
-
-    console.log(weatherData);
-
-    let locationImageResponse = await getData(
-        `https://pixabay.com/api/?key=${pexKey}&q=${location}&image_type=photo`
+  } else {
+    weatherResponse = await getData(
+      `https://api.weatherbit.io/v2.0/forecast/daily?key=${weatherKey}&lat=${lat}&lon=${lng}`
     );
+  }
 
-    let locationImage = "";
-    try {
-        locationImage = locationImageResponse.hits[0].largeImageURL;
-        console.log(locationImage);
-    } catch {
-        locationImageResponse = await getData(
-            `https://pixabay.com/api/?key=${pexKey}&q=404&image_type=photo`
-        );
-        locationImage = locationImageResponse.hits[0].largeImageURL;
-        console.log(locationImage);
-    }
+  const weatherData = weatherResponse.data[0];
 
-    return {
-        locationImage: locationImage,
-        weatherData: weatherData,
-    };
+  let locationImageResponse = await getData(
+    `https://pixabay.com/api/?key=${pexKey}&q=${location}&image_type=photo`
+  );
+
+  let locationImage = "";
+  try {
+    locationImage = locationImageResponse.hits[0].largeImageURL;
+  } catch {
+    locationImageResponse = await getData(
+      `https://pixabay.com/api/?key=${pexKey}&q=404&image_type=photo`
+    );
+    locationImage = locationImageResponse.hits[0].largeImageURL;
+  }
+
+  return {
+    locationImage: locationImage,
+    weatherData: weatherData,
+  };
 }
 
 module.exports = {
-    getInformations
-}
+  getInformations,
+};
